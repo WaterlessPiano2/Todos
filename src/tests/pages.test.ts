@@ -1,10 +1,6 @@
 export {};
 
 describe("pages", () => {
-  xit("Make sure tests are working", () => {
-    expect(1).toBe(1);
-  });
-
   xit("Show message when task list is empty", () => {
     expect(1).toBe(2);
   });
