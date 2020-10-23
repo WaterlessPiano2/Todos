@@ -141,7 +141,7 @@ function ResponsiveDrawer(props: { window: any }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Simple Tasks List
           </Typography>
         </Toolbar>
       </AppBar>

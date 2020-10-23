@@ -16,6 +16,9 @@ import Typography from "@material-ui/core/Typography";
 import FolderIcon from "@material-ui/icons/Folder";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SearchIcon from "@material-ui/icons/Search";
+import EditIcon from "@material-ui/icons/Edit";
+import AddIcon from "@material-ui/icons/Add";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,45 +68,60 @@ export default function InteractiveList() {
           label="Enable secondary text"
         />
       </FormGroup>
-
-      <Grid item xs={12} md={6}>
-        <Typography variant="h6" className={classes.title}>
-          Tasks List
-        </Typography>
-        <div className={classes.demo}>
-          <List dense={dense}>
-            {generate(
-              <ListItem>
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={false}
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemAvatar>
-                  <Avatar>
-                    <FolderIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary="Single-line item"
-                  secondary={secondary ? "Secondary text" : null}
-                />
-                <ListItemSecondaryAction>
-                  <IconButton edge="start" aria-label="delete">
-                    <SearchIcon />
-                  </IconButton>
-                  <IconButton edge="start" aria-label="search">
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
-          </List>
-        </div>
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
+      >
+        <Grid item xs={8}>
+          <Typography variant="h6" className={classes.title}>
+            Tasks
+          </Typography>
+        </Grid>
+        {/* Allign this button to the end */}
+        <Grid item justify="flex-end" xs={4}>
+          <Button variant="contained" color="primary" startIcon={<AddIcon />}>
+            Create a new Task
+          </Button>
+        </Grid>
       </Grid>
+      <div className={classes.demo}>
+        <List dense={dense}>
+          {generate(
+            <ListItem>
+              <ListItemIcon>
+                <Checkbox
+                  edge="start"
+                  checked={false}
+                  tabIndex={-1}
+                  disableRipple
+                />
+              </ListItemIcon>
+              <ListItemAvatar>
+                <Avatar>
+                  <FolderIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary="Single-line item"
+                secondary={secondary ? "Secondary text" : null}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="start" aria-label="edit">
+                  <EditIcon />
+                </IconButton>
+                <IconButton edge="start" aria-label="delete">
+                  <SearchIcon />
+                </IconButton>
+                <IconButton edge="start" aria-label="search">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )}
+        </List>
+      </div>
     </div>
   );
 }
