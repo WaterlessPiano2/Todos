@@ -14,13 +14,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import  {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import AddIcon from "@material-ui/icons/Add";
 import InfoIcon from "@material-ui/icons/Info";
 
-const drawerWidth = 240;
+const drawerWidth = 150;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +67,7 @@ function ResponsiveDrawer(props: { window: any }) {
 
   const drawer = (
     <div>
+      <div className={classes.toolbar} />
       <Divider />
       <List>
         <Link style={{ textDecoration: "none" }} to="/">

@@ -4,15 +4,18 @@ import About from "./pages/About";
 import Tasks from "./pages/Tasks";
 import NewTask from "./pages/NewTask";
 import ResponsiveDrawer from "./components/Menu";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
-// This site has 3 pages, all of which are rendered
-// dynamically in the browser (not server rendered).
-//
-// Although the page does not ever refresh, notice how
-// React Router keeps the URL up to date as you navigate
-// through the site. This preserves the browser history,
-// making sure things like the back button and bookmarks
-// work properly.
+const useStyles = makeStyles({
+  responsive: {
+    paddingTop: 60,
+    paddingLeft: 150,
+    paddingright: 20,
+    marginRight: 20,
+    //backgroundColor: "red",
+  },
+});
 
 const routes = () => {
   return (
@@ -31,11 +34,15 @@ const routes = () => {
 };
 
 const App = () => {
+  const classes = useStyles();
+
   return (
     <Router>
       <div>
         <ResponsiveDrawer />
-        {routes()}
+        <Container className={classes.responsive} fixed>
+          <div>{routes()}</div>
+        </Container>
       </div>
     </Router>
   );
