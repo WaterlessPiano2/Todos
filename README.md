@@ -2,6 +2,25 @@
 
 A simple front-end only to-do list
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
 ## Requirements
 
 These are the main rewquirements.
@@ -16,7 +35,6 @@ These are the main rewquirements.
 These are the requirements for each task and the task list specifically.
 
 - [ ] The **tasks list shows** the **title and due date** of tasks and will **visually indicate if the task is overdue or completed**. (background or border colours or icons)
-
 - [ ] **Incomplete tasks** will have **a tick icon button to mark** the task as completed
 - [ ] **All tasks will have a** magnifying glass **icon button to view the details** as a different page.
 - [ ] **All tasks will have a** a trashcan icon button to **delete** the task
