@@ -4,7 +4,8 @@ import About from "./pages/About";
 import Tasks from "./pages/Tasks";
 import NewTask from "./pages/NewTask";
 import ResponsiveDrawer from "./components/Menu";
-import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles({
@@ -29,18 +30,23 @@ const routes = () => {
     </Switch>
   );
 };
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+  },
+});
 
 const App = () => {
   const classes = useStyles();
 
   return (
     <Router>
-      <div>
+      <ThemeProvider theme={darkTheme}>
         <ResponsiveDrawer />
         <Container className={classes.responsive} fixed>
           <div>{routes()}</div>
         </Container>
-      </div>
+      </ThemeProvider>
     </Router>
   );
 };
