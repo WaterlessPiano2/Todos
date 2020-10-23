@@ -9,11 +9,8 @@ import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles({
   responsive: {
-    paddingTop: 60,
-    paddingLeft: 150,
-    paddingright: 20,
-    marginRight: 20,
-    //backgroundColor: "red",
+    marginTop: 60,
+    padding: 20,
   },
 });
 
