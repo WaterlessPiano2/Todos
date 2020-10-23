@@ -27,8 +27,8 @@ These are the main rewquirements.
 
 - [ ] When a task is **created, edited or deleted** the tasks will be **updated in application state and persisted to local storage**
 - [ ] The **main page** will be a **list of tasks** and a **create task button**
-- [ ] **Each page** will have a side menu showing the sections **Tasks and About**
-- [ ] In the **About page** talk about the decisons made
+- [x] **Each page** will have a side menu showing the sections **Tasks and About**
+- [x] In the **About page** talk about the decisons made
 
 ### Tasks
 

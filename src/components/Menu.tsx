@@ -98,25 +98,25 @@ function ResponsiveDrawer(props: { window: any }) {
       <Divider />
       <List>
         <ListItem button component={Link} to="/">
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Tasks"} />
+          <ListItemIcon>
+            <AssignmentIcon />
+          </ListItemIcon>
+          <ListItemText primary={"Tasks"} />
         </ListItem>
 
         <ListItem button component={Link} to="/about">
-            <ListItemIcon>
-              <InfoIcon />
-            </ListItemIcon>
-            <ListItemText primary={"About"} />
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary={"About"} />
         </ListItem>
 
         <ListItem button component={Link} to="/new">
-            <ListItemIcon>
-              <AddIcon />
-            </ListItemIcon>
-            <ListItemText primary={"new"} />
-          </ListItem>
+          <ListItemIcon>
+            <AddIcon />
+          </ListItemIcon>
+          <ListItemText primary={"New Task"} />
+        </ListItem>
       </List>
     </div>
   );
