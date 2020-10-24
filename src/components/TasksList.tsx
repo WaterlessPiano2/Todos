@@ -28,13 +28,20 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
   },
   demo: {
+    marginTop:10,
     backgroundColor: theme.palette.background.paper,
   },
   title: {
     textAlign: "center",
   },
   createButton: {
-    textAlign: "center",
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    border: 0,
+    borderRadius: 3,
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
+    color: "white",
+    height: 48,
+    padding: "0 30px",
   },
 }));
 
@@ -74,25 +81,23 @@ const TasksList = () => {
         />
       </FormGroup>
       <Grid container justify="space-around" direction="row">
-        <Grid item xs={8}>
+        <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
             Tasks
           </Typography>
         </Grid>
         {/* Allign this button to the end */}
       </Grid>
-      <Grid item justify="flex-end" xs={4}>
-        <Button
-          className={classes.createButton}
-          component={Link}
-          to="/new"
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-        >
-          Create a new Task
-        </Button>
-      </Grid>
+      <Button
+        className={classes.createButton}
+        component={Link}
+        to="/new"
+        variant="contained"
+        color="primary"
+        startIcon={<AddIcon />}
+      >
+        Create a new Task
+      </Button>
       <div className={classes.demo}>
         <List dense={dense}>
           {generate(
