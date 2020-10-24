@@ -1,11 +1,10 @@
 import React from "react";
-import InteractiveList from "../components/TasksList";
+import TasksList from "../components/TasksList";
 
 const Tasks = () => {
   return (
     <div>
-      <h2>Tasks</h2>
-      <InteractiveList />
+      <TasksList />
     </div>
   );
 };

@@ -23,14 +23,18 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    maxWidth: 752,
+    maxWidth: "680px",
+    display: "block",
+    margin: "0 auto",
   },
   demo: {
     backgroundColor: theme.palette.background.paper,
   },
   title: {
-    margin: theme.spacing(4, 0, 2),
+    textAlign: "center",
+  },
+  createButton: {
+    textAlign: "center",
   },
 }));
 
@@ -42,7 +46,7 @@ function generate(element: JSX.Element) {
   );
 }
 
-export default function InteractiveList() {
+const TasksList = () => {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
@@ -69,29 +73,25 @@ export default function InteractiveList() {
           label="Enable secondary text"
         />
       </FormGroup>
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="center"
-      >
+      <Grid container justify="space-around" direction="row">
         <Grid item xs={8}>
           <Typography variant="h6" className={classes.title}>
             Tasks
           </Typography>
         </Grid>
         {/* Allign this button to the end */}
-        <Grid item justify="flex-end" xs={4}>
-          <Button
-            component={Link}
-            to="/new"
-            variant="contained"
-            color="primary"
-            startIcon={<AddIcon />}
-          >
-            Create a new Task
-          </Button>
-        </Grid>
+      </Grid>
+      <Grid item justify="flex-end" xs={4}>
+        <Button
+          className={classes.createButton}
+          component={Link}
+          to="/new"
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+        >
+          Create a new Task
+        </Button>
       </Grid>
       <div className={classes.demo}>
         <List dense={dense}>
@@ -131,4 +131,6 @@ export default function InteractiveList() {
       </div>
     </div>
   );
-}
+};
+
+export default TasksList;
