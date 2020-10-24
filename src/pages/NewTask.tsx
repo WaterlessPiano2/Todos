@@ -1,9 +1,10 @@
 import React from "react";
+import TaskForm from "../components/TaskForm";
 
 const NewTask = () => {
   return (
     <div>
-      <h2>Create a new task</h2>
+      <TaskForm />
     </div>
   );
 };

@@ -109,13 +109,6 @@ function ResponsiveDrawer(props: { window: any }) {
           </ListItemIcon>
           <ListItemText primary={"About"} />
         </ListItem>
-        {/* 
-        <ListItem button component={Link} to="/new">
-          <ListItemIcon>
-            <AddIcon />
-          </ListItemIcon>
-          <ListItemText primary={"New Task"} />
-        </ListItem> */}
       </List>
     </div>
   );
@@ -170,10 +163,6 @@ function ResponsiveDrawer(props: { window: any }) {
 }
 
 ResponsiveDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
