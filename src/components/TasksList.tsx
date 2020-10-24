@@ -19,6 +19,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import EditIcon from "@material-ui/icons/Edit";
 import AddIcon from "@material-ui/icons/Add";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,7 +82,13 @@ export default function InteractiveList() {
         </Grid>
         {/* Allign this button to the end */}
         <Grid item justify="flex-end" xs={4}>
-          <Button variant="contained" color="primary" startIcon={<AddIcon />}>
+          <Button
+            component={Link}
+            to="/new"
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+          >
             Create a new Task
           </Button>
         </Grid>

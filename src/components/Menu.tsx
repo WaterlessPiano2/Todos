@@ -19,7 +19,6 @@ import { Link } from "react-router-dom";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import AddIcon from "@material-ui/icons/Add";
 import InfoIcon from "@material-ui/icons/Info";
 
 const drawerWidth = 150;
@@ -110,13 +109,13 @@ function ResponsiveDrawer(props: { window: any }) {
           </ListItemIcon>
           <ListItemText primary={"About"} />
         </ListItem>
-
+        {/* 
         <ListItem button component={Link} to="/new">
           <ListItemIcon>
             <AddIcon />
           </ListItemIcon>
           <ListItemText primary={"New Task"} />
-        </ListItem>
+        </ListItem> */}
       </List>
     </div>
   );
