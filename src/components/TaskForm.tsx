@@ -96,9 +96,17 @@ const TaskForm: React.FunctionComponent = () => {
           }, 500);
         }}
         validationSchema={Yup.object().shape({
-          title: Yup.string().defined(),
-          description: Yup.string().defined(),
-          dueDate: Yup.string().defined(),
+          title: Yup.string()
+            .defined()
+            .min(2, "Too Short!")
+            .max(50, "Too Long!"),
+          description: Yup.string()
+            .defined()
+            .min(2, "Too Short!")
+            .max(50, "Too Long!"),
+          dueDate: Yup.date()
+            .defined()
+            .min(new Date(), "Due date can not be in the past"),
         })}
       >
         {(props: FormikProps<ITaskForm>) => {

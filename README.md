@@ -46,7 +46,7 @@ These are about how the form for tasks.
 
 - [ ] The edit and create form and will **be the same compoenent**
 - [ ] **Description** is a **textarea** html tag
-- [ ] Create and edit **forms** should have appropriate **validation** added.
+- [x] Create and edit **forms** should have appropriate **validation** added.
 - [ ] Additionally, one or more **images can be added** to the task
 - [ ] **If present a thumbnail** of the first task image will be **displayed**
 
