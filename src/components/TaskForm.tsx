@@ -128,12 +128,16 @@ const TaskForm: React.FunctionComponent = () => {
     }
   };
 
+  const editATask = (data: ITaskForm, resetForm: Function) => {};
+
   return (
     <div className={classes.root}>
       <Formik
         initialValues={defaultInputs}
         onSubmit={(values: ITaskForm, actions) => {
-          createNewTask(values, actions.resetForm);
+          isEditMode === -1
+            ? createNewTask(values, actions.resetForm)
+            : editATask(values, actions.resetForm);
           setTimeout(() => {
             actions.setSubmitting(false);
           }, 500);
