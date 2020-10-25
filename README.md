@@ -34,7 +34,7 @@ These are the main rewquirements.
 
 These are the requirements for each task and the task list specifically.
 
-- [ ] The **tasks list shows** the **title and due date** of tasks and will **visually indicate if the task is overdue or completed**. (background or border colours or icons)
+- [x] The **tasks list shows** the **title and due date** of tasks and will **visually indicate if the task is overdue or completed**. (background or border colours or icons)
 - [x] **Incomplete tasks** will have **a tick icon button to mark** the task as completed
 - [ ] **All tasks will have a** magnifying glass **icon button to view the details** as a different page.
 - [ ] **All tasks will have a** a trashcan icon button to **delete** the task

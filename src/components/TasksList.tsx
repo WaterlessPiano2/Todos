@@ -70,7 +70,19 @@ const TasksList = () => {
     getTodoItemsFromLocalStorage("todo") || []
   );
 
-  function toggleCompleted(todo: ITaskForm) {
+  function toggleCompleted(id: number) {
+    const newTodoItems = todoItems.map((t) => {
+      if (t.id === id) {
+        t.isCompleted = !t.isCompleted;
+      }
+      return t;
+    });
+    saveTodoItemsToLocalStorage("todo", newTodoItems);
+
+    setTodoItems(newTodoItems);
+  }
+
+  function deleteTasks(todo: ITaskForm) {
     const newTodoItems = todoItems.map((t) => {
       if (t.id === todo.id) {
         t.isCompleted = !t.isCompleted;
@@ -83,7 +95,7 @@ const TasksList = () => {
   }
 
   function generateList(todos: ITaskForm[]): JSX.Element[] {
-    return todos.map((todo) => {
+    return todos.map((todo: ITaskForm) => {
       return (
         <ListItem key={Math.random().toString()}>
           <ListItemIcon className={classes.toggleComplete}>
@@ -94,13 +106,17 @@ const TasksList = () => {
                     edge="start"
                     tabIndex={-1}
                     checked={todo.isCompleted}
-                    onChange={(event) => toggleCompleted(todo)}
+                    onChange={(event) => toggleCompleted(todo.id)}
                   />
                 }
                 label={todo.isCompleted ? "Completed" : "Not Completed"}
               />
             </FormGroup>
           </ListItemIcon>
+          <ListItemIcon className={classes.toggleComplete}>
+            {new Date(todo.dueDate) > new Date() ? "Got time left" : "Overdue"}
+          </ListItemIcon>
+
           <ListItemAvatar>
             <Avatar>
               <FolderIcon />
