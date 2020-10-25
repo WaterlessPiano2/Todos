@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./pages/About";
 import Tasks from "./pages/Tasks";
 import NewTask from "./pages/NewTask";
+import EditTask from "./pages/EditTask";
 import ResponsiveDrawer from "./components/Menu";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
@@ -26,6 +27,9 @@ const routes = () => {
       </Route>
       <Route path="/new">
         <NewTask />
+      </Route>
+      <Route path="/edit/:id">
+        <EditTask />
       </Route>
     </Switch>
   );

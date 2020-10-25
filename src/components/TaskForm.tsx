@@ -12,6 +12,7 @@ import {
   getTodoItemsFromLocalStorage,
   saveTodoItemsToLocalStorage,
 } from "../helper";
+import { useRouteMatch } from "react-router-dom";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -66,13 +67,20 @@ const formStatusProps: IFormStatusProps = {
 const TaskForm: React.FunctionComponent = () => {
   const classes = useStyles();
   const [displayFormStatus, setDisplayFormStatus] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [formStatus, setFormStatus] = useState<IFormStatus>({
     message: "",
     type: "",
   });
   const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
 
-  const createNewTask = async (data: ITaskForm, resetForm: Function) => {
+  const match = useRouteMatch("/edit/:id");
+  if (match !== null && match.params) {
+    console.log(match.params);
+
+  }
+
+  const createNewTask = (data: ITaskForm, resetForm: Function) => {
     try {
       if (data) {
         let latestTodoItem = null;
@@ -87,7 +95,6 @@ const TaskForm: React.FunctionComponent = () => {
 
         const newTodoItem = data;
         newTodoItem.id = latestTodoItem ? latestTodoItem.id + 1 : 0;
-        // Add new Todo at the beginning of the array
         const newTodoItems: ITaskForm[] = [newTodoItem, ...todoItems];
 
         saveTodoItemsToLocalStorage("todo", newTodoItems);
@@ -143,7 +150,10 @@ const TaskForm: React.FunctionComponent = () => {
           } = props;
           return (
             <Form>
-              <h1 className={classes.title}>Create a new task</h1>
+              <h1 className={classes.title}>
+                {" "}
+                {isEditMode ? `Edit a` : `Create a new `}task
+              </h1>
               <Grid container justify="space-around" direction="row">
                 <Grid
                   item

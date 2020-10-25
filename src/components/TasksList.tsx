@@ -23,6 +23,7 @@ import {
   saveTodoItemsToLocalStorage,
 } from "../helper";
 import { ITaskForm } from "./TaskForm";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +70,7 @@ const TasksList = () => {
   const [todoItems, setTodoItems] = React.useState(
     getTodoItemsFromLocalStorage("todo") || []
   );
+  const history = useHistory();
 
   function toggleCompleted(id: number) {
     const newTodoItems = todoItems.map((t) => {
@@ -142,12 +144,16 @@ const TasksList = () => {
             </Grid>
           </Grid>
           <ListItemSecondaryAction>
-            <IconButton edge="start" aria-label="edit">
+            <IconButton
+              edge="start"
+              aria-label="edit"
+              onClick={() => history.push(`/edit/${todo.id}`)}
+            >
               <EditIcon />
             </IconButton>
-              <IconButton edge="start" aria-label="search">
-                <SearchIcon />
-              </IconButton>
+            <IconButton edge="start" aria-label="search">
+              <SearchIcon />
+            </IconButton>
             <IconButton
               edge="start"
               aria-label="delete"
