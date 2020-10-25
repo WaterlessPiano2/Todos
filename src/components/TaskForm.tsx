@@ -92,8 +92,8 @@ const TaskForm: React.FunctionComponent = () => {
           id = Number(value);
           setIsEditMode(id);
 
-          // const todos: ITaskForm = todoItems.find((t) => t.id === id);
-          // setDefaultInputs(todos);
+          const todos = todoItems.filter((t) => t.id === id);
+          setDefaultInputs(todos[0]);
         }
       }
     }
@@ -154,13 +154,13 @@ const TaskForm: React.FunctionComponent = () => {
       >
         {(props: FormikProps<ITaskForm>) => {
           const {
-            values,
             touched,
             errors,
             handleBlur,
             handleChange,
             isSubmitting,
           } = props;
+          let values = defaultInputs;
           return (
             <Form>
               <h1 className={classes.title}>
