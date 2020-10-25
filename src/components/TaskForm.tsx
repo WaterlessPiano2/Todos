@@ -65,20 +65,39 @@ const formStatusProps: IFormStatusProps = {
 };
 
 const TaskForm: React.FunctionComponent = () => {
+  const match = useRouteMatch("/edit/:id");
   const classes = useStyles();
+  const [defaultInputs, setDefaultInputs] = useState({
+    id: 0,
+    title: "",
+    description: "",
+    isCompleted: false,
+    dueDate: new Date(),
+  });
   const [displayFormStatus, setDisplayFormStatus] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(-1);
   const [formStatus, setFormStatus] = useState<IFormStatus>({
     message: "",
     type: "",
   });
   const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
 
-  const match = useRouteMatch("/edit/:id");
-  if (match !== null && match.params) {
-    console.log(match.params);
+  React.useEffect(() => {
+    if (match !== null && match.params) {
+      const params = match.params;
+      let id: number;
+      //I havent been able to get the ` match.params.id` for a while so had to use this for the time being
+      for (const [key, value] of Object.entries(params)) {
+        if (typeof value === `string`) {
+          id = Number(value);
+          setIsEditMode(id);
 
-  }
+          // const todos: ITaskForm = todoItems.find((t) => t.id === id);
+          // setDefaultInputs(todos);
+        }
+      }
+    }
+  }, []);
 
   const createNewTask = (data: ITaskForm, resetForm: Function) => {
     try {
@@ -112,13 +131,7 @@ const TaskForm: React.FunctionComponent = () => {
   return (
     <div className={classes.root}>
       <Formik
-        initialValues={{
-          id: 0,
-          title: "",
-          description: "",
-          isCompleted: false,
-          dueDate: new Date(),
-        }}
+        initialValues={defaultInputs}
         onSubmit={(values: ITaskForm, actions) => {
           createNewTask(values, actions.resetForm);
           setTimeout(() => {
@@ -152,7 +165,7 @@ const TaskForm: React.FunctionComponent = () => {
             <Form>
               <h1 className={classes.title}>
                 {" "}
-                {isEditMode ? `Edit a` : `Create a new `}task
+                {isEditMode !== -1 ? `Edit a ` : `Create a new `}task
               </h1>
               <Grid container justify="space-around" direction="row">
                 <Grid
