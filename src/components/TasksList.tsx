@@ -16,9 +16,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import SearchIcon from "@material-ui/icons/Search";
 import EditIcon from "@material-ui/icons/Edit";
 import AddIcon from "@material-ui/icons/Add";
-import { Button } from "@material-ui/core";
+import { Button, FormControlLabel, FormGroup } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { getTodoItemsFromLocalStorage } from "../helper";
+import {
+  getTodoItemsFromLocalStorage,
+  saveTodoItemsToLocalStorage,
+} from "../helper";
 import { ITaskForm } from "./TaskForm";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     margin: "0 auto",
   },
-  demo: {
-    marginTop: 10,
+  list: {
+    marginTop: 40,
     backgroundColor: theme.palette.background.paper,
   },
   title: {
@@ -49,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
     height: 48,
     padding: "0 30px",
   },
+  toggleComplete: {
+    paddingLeft: 16,
+    width: 125,
+  },
   taskTitle: { fontSize: 30 },
   taskDescription: {
     maxWidth: "500px",
@@ -57,25 +64,49 @@ const useStyles = makeStyles((theme) => ({
 
 const TasksList = () => {
   const classes = useStyles();
-  const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
+  const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
+  const [todoItems, setTodoItems] = React.useState(
+    getTodoItemsFromLocalStorage("todo") || []
+  );
+
+  function toggleCompleted(todo: ITaskForm) {
+    const newTodoItems = todoItems.map((t) => {
+      if (t.id === todo.id) {
+        t.isCompleted = !t.isCompleted;
+      }
+      return t;
+    });
+    saveTodoItemsToLocalStorage("todo", newTodoItems);
+
+    setTodoItems(newTodoItems);
+  }
 
   function generateList(todos: ITaskForm[]): JSX.Element[] {
     return todos.map((todo) => {
       return (
-        <ListItem>
-          <ListItemIcon>
-            <Checkbox
-              edge="start"
-              checked={todo.isCompleted}
-              tabIndex={-1}
-              disableRipple
-            />
+        <ListItem key={Math.random().toString()}>
+          <ListItemIcon className={classes.toggleComplete}>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    edge="start"
+                    tabIndex={-1}
+                    checked={todo.isCompleted}
+                    onChange={(event) => toggleCompleted(todo)}
+                  />
+                }
+                label={todo.isCompleted ? "Completed" : "Not Completed"}
+              />
+            </FormGroup>
           </ListItemIcon>
           <ListItemAvatar>
             <Avatar>
               <FolderIcon />
             </Avatar>
           </ListItemAvatar>
+
           <Grid container direction="column">
             <Grid item lg={10} md={7} sm={6} xs={5}>
               <Typography
@@ -122,6 +153,26 @@ const TasksList = () => {
             Tasks
           </Typography>
         </Grid>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={dense}
+                onChange={(event) => setDense(event.target.checked)}
+              />
+            }
+            label="Enable dense"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={secondary}
+                onChange={(event) => setSecondary(event.target.checked)}
+              />
+            }
+            label="Enable secondary text"
+          />
+        </FormGroup>
         <Grid item xs={12}>
           <Button
             className={classes.createButton}
@@ -137,7 +188,7 @@ const TasksList = () => {
       </Grid>
 
       {todoItems.length ? (
-        <div className={classes.demo}>
+        <div className={classes.list}>
           <List>{generateList(todoItems)}</List>
         </div>
       ) : (
