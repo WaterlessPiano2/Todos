@@ -152,7 +152,7 @@ const TasksList = () => {
               <EditIcon />
             </IconButton>
             <IconButton edge="start" aria-label="search">
-              <SearchIcon />
+              <SearchIcon onClick={() => history.push(`/info/${todo.id}`)} />
             </IconButton>
             <IconButton
               edge="start"

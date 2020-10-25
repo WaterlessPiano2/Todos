@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Tasks from "./pages/Tasks";
 import NewTask from "./pages/NewTask";
 import EditTask from "./pages/EditTask";
+import TaskInfo from "./pages/TaskInfo";
 import ResponsiveDrawer from "./components/Menu";
 import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
@@ -30,6 +31,9 @@ const routes = () => {
       </Route>
       <Route path="/edit/:id">
         <EditTask />
+      </Route>
+      <Route path="/info/:id">
+        <TaskInfo />
       </Route>
     </Switch>
   );
