@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toggleComplete: {
     paddingLeft: 16,
-    width: 125,
+    width: 70,
   },
   taskTitle: { fontSize: 30 },
   taskDescription: {
@@ -107,12 +107,12 @@ const TasksList = () => {
                     onChange={(event) => toggleCompleted(todo.id)}
                   />
                 }
-                label={todo.isCompleted ? "Completed" : "Not Completed"}
+                label={todo.isCompleted ? "Done" : "Not Done"}
               />
             </FormGroup>
           </ListItemIcon>
           <ListItemIcon className={classes.toggleComplete}>
-            {new Date(todo.dueDate) > new Date() ? "Got time left" : "Overdue"}
+            {new Date(todo.dueDate) > new Date() ? "Time left" : "Overdue"}
           </ListItemIcon>
 
           <ListItemAvatar>
@@ -122,7 +122,7 @@ const TasksList = () => {
           </ListItemAvatar>
 
           <Grid container direction="column">
-            <Grid item lg={10} md={7} sm={6} xs={5}>
+            <Grid item lg={10} md={7} sm={6} xs={3}>
               <Typography
                 className={classes.taskTitle}
                 variant="inherit"
@@ -132,7 +132,7 @@ const TasksList = () => {
                 {todo.title}
               </Typography>
             </Grid>
-            <Grid item lg={10} md={8} sm={7} xs={6}>
+            <Grid item lg={8} md={8} sm={5} xs={3}>
               <Typography
                 className={classes.taskDescription}
                 variant="inherit"
