@@ -1,3 +1,5 @@
+import { ITaskForm } from "./components/TaskForm";
+
 export const getTodoItemsFromLocalStorage = (key: string) => {
   const value: string | null = localStorage.getItem(key);
 
@@ -18,7 +20,5 @@ export const getTodoItemsFromLocalStorage = (key: string) => {
   return todoItems;
 };
 
-export const saveTodoItemsToLocalStorage = (
-  key: string,
-  data: { string: string | boolean | Date }
-) => localStorage.setItem(key, JSON.stringify(data))
+export const saveTodoItemsToLocalStorage = (key: string, data: ITaskForm) =>
+  localStorage.setItem(key, JSON.stringify(data));

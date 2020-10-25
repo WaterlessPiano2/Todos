@@ -30,7 +30,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-interface ITaskForm {
+export interface ITaskForm {
   title: string;
   description: string;
   isCompleted: boolean;

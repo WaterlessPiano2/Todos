@@ -19,6 +19,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { getTodoItemsFromLocalStorage } from "../helper";
+import { ITaskForm } from "./TaskForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,9 +36,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   emptyListMessage: {
+    marginTop: 50,
     textAlign: "center",
   },
   createButton: {
+    marginTop:25,
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     border: 0,
     borderRadius: 3,
@@ -48,9 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function generateList(
-  todos: { string: string | boolean | Date }[]
-): JSX.Element[] {
+function generateList(todos: ITaskForm[]): JSX.Element[] {
   return todos.map((todo) => {
     return (
       <ListItem>
@@ -85,30 +86,36 @@ const TasksList = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container justify="space-around" direction="row">
+      <Grid container alignItems="center" justify="center" direction="column">
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
             Tasks
           </Typography>
         </Grid>
-        {/* Allign this button to the end */}
+        <Grid item xs={12}>
+          <Button
+            className={classes.createButton}
+            component={Link}
+            to="/new"
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+          >
+            Create a new Task
+          </Button>
+        </Grid>
       </Grid>
-      <Button
-        className={classes.createButton}
-        component={Link}
-        to="/new"
-        variant="contained"
-        color="primary"
-        startIcon={<AddIcon />}
-      >
-        Create a new Task
-      </Button>
+
       {todoItems.length ? (
         <div className={classes.demo}>
           <List>{generateList(todoItems)}</List>
         </div>
       ) : (
-        <Typography className={classes.title} variant="h4" gutterBottom>
+        <Typography
+          className={classes.emptyListMessage}
+          variant="h4"
+          gutterBottom
+        >
           You have not created any tasks.
         </Typography>
       )}
