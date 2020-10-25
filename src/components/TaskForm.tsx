@@ -80,13 +80,13 @@ const TaskForm: React.FunctionComponent = () => {
           latestTodoItem = todoItems[0];
         } else if (todoItems.length > 1) {
           const todoItemsDescendingSortedById = todoItems.sort(
-            (a, b) => a.id - b.id
+            (a, b) => b.id - a.id
           );
           latestTodoItem = todoItemsDescendingSortedById[0];
         }
 
         const newTodoItem = data;
-        newTodoItem.id = latestTodoItem ? latestTodoItem.id + 1 : 0
+        newTodoItem.id = latestTodoItem ? latestTodoItem.id + 1 : 0;
         // Add new Todo at the beginning of the array
         const newTodoItems: ITaskForm[] = [newTodoItem, ...todoItems];
 
