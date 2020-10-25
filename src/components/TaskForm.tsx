@@ -128,7 +128,7 @@ const TaskForm: React.FunctionComponent = () => {
     }
   };
 
-  const editATask = (data: ITaskForm, resetForm: Function) => {
+  const editATask = (data: ITaskForm) => {
     try {
       if (data) {
         const newTodoItems: ITaskForm[] = todoItems.map((t) => {
@@ -141,7 +141,6 @@ const TaskForm: React.FunctionComponent = () => {
         saveTodoItemsToLocalStorage("todo", newTodoItems);
 
         setFormStatus(formStatusProps.success);
-        resetForm({});
       }
     } catch (error) {
       setFormStatus(formStatusProps.error);
@@ -153,11 +152,12 @@ const TaskForm: React.FunctionComponent = () => {
   return (
     <div className={classes.root}>
       <Formik
+        enableReinitialize
         initialValues={defaultInputs}
         onSubmit={(values: ITaskForm, actions) => {
           isEditMode === -1
             ? createNewTask(values, actions.resetForm)
-            : editATask(values, actions.resetForm);
+            : editATask(values);
           setTimeout(() => {
             actions.setSubmitting(false);
           }, 500);
@@ -177,18 +177,18 @@ const TaskForm: React.FunctionComponent = () => {
         })}
       >
         {(props: FormikProps<ITaskForm>) => {
-          const {
+          let {
+            values,
             touched,
             errors,
             handleBlur,
             handleChange,
             isSubmitting,
           } = props;
-          let values = defaultInputs;
+
           return (
             <Form>
               <h1 className={classes.title}>
-                {" "}
                 {isEditMode !== -1 ? `Edit a ` : `Create a new `}task
               </h1>
               <Grid container justify="space-around" direction="row">
