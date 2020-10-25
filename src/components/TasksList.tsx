@@ -8,8 +8,6 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -20,6 +18,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import AddIcon from "@material-ui/icons/Add";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { getTodoItemsFromLocalStorage } from "../helper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,10 +27,14 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
   },
   demo: {
-    marginTop:10,
+    marginTop: 10,
     backgroundColor: theme.palette.background.paper,
   },
   title: {
+    marginTop: 10,
+    textAlign: "center",
+  },
+  emptyListMessage: {
     textAlign: "center",
   },
   createButton: {
@@ -45,41 +48,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function generate(element: JSX.Element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    })
-  );
+function generateList(
+  todos: { string: string | boolean | Date }[]
+): JSX.Element[] {
+  return todos.map((todo) => {
+    return (
+      <ListItem>
+        <ListItemIcon>
+          <Checkbox edge="start" checked={false} tabIndex={-1} disableRipple />
+        </ListItemIcon>
+        <ListItemAvatar>
+          <Avatar>
+            <FolderIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Single-line item" secondary={"Secondary text"} />
+        <ListItemSecondaryAction>
+          <IconButton edge="start" aria-label="edit">
+            <EditIcon />
+          </IconButton>
+          <IconButton edge="start" aria-label="delete">
+            <SearchIcon />
+          </IconButton>
+          <IconButton edge="start" aria-label="search">
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
+    );
+  });
 }
 
 const TasksList = () => {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  const todoItems = getTodoItemsFromLocalStorage("todo") || [];
 
   return (
     <div className={classes.root}>
-      <FormGroup row>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={dense}
-              onChange={(event) => setDense(event.target.checked)}
-            />
-          }
-          label="Enable dense"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={secondary}
-              onChange={(event) => setSecondary(event.target.checked)}
-            />
-          }
-          label="Enable secondary text"
-        />
-      </FormGroup>
       <Grid container justify="space-around" direction="row">
         <Grid item xs={12}>
           <Typography variant="h6" className={classes.title}>
@@ -98,42 +103,15 @@ const TasksList = () => {
       >
         Create a new Task
       </Button>
-      <div className={classes.demo}>
-        <List dense={dense}>
-          {generate(
-            <ListItem>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={false}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemAvatar>
-                <Avatar>
-                  <FolderIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary="Single-line item"
-                secondary={secondary ? "Secondary text" : null}
-              />
-              <ListItemSecondaryAction>
-                <IconButton edge="start" aria-label="edit">
-                  <EditIcon />
-                </IconButton>
-                <IconButton edge="start" aria-label="delete">
-                  <SearchIcon />
-                </IconButton>
-                <IconButton edge="start" aria-label="search">
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          )}
-        </List>
-      </div>
+      {todoItems.length ? (
+        <div className={classes.demo}>
+          <List>{generateList(todoItems)}</List>
+        </div>
+      ) : (
+        <Typography className={classes.title} variant="h4" gutterBottom>
+          You have not created any tasks.
+        </Typography>
+      )}
     </div>
   );
 };

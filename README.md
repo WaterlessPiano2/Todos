@@ -52,4 +52,4 @@ These are about how the form for tasks.
 
 ### Others
 
-- [ ] When viewing the product the first time show a **message** to say their **list is empty**
+- [x] When viewing the product the first time show a **message** to say their **list is empty**
