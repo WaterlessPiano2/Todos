@@ -26,7 +26,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 These are the main rewquirements.
 
 - [ ] When a task is **created, edited or deleted** the tasks will be **updated in application state and persisted to local storage**
-- [ ] The **main page** will be a **list of tasks** and a **create task button**
+- [x] The **main page** will be a **list of tasks** and a **create task button**
 - [x] **Each page** will have a side menu showing the sections **Tasks and About**
 - [x] In the **About page** talk about the decisons made
 
@@ -44,7 +44,7 @@ These are the requirements for each task and the task list specifically.
 
 These are about how the form for tasks.
 
-- [ ] The edit and create form and will **be the same compoenent**
+- [ ] The edit and create form will **be the same compoenent**
 - [x] **Description** is a **textarea** html tag
 - [x] Create and edit **forms** should have appropriate **validation** added.
 - [ ] Additionally, one or more **images can be added** to the task

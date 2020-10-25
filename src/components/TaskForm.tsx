@@ -8,6 +8,10 @@ import {
 } from "@material-ui/core";
 import { Formik, Form, FormikProps } from "formik";
 import * as Yup from "yup";
+import {
+  getTodoItemsFromLocalStorage,
+  saveTodoItemsToLocalStorage,
+} from "../helper";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -31,6 +35,7 @@ const useStyles = makeStyles(() =>
 );
 
 export interface ITaskForm {
+  id: number;
   title: string;
   description: string;
   isCompleted: boolean;
@@ -65,11 +70,28 @@ const TaskForm: React.FunctionComponent = () => {
     message: "",
     type: "",
   });
+  const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
 
   const createNewTask = async (data: ITaskForm, resetForm: Function) => {
     try {
-      //Saving to local storage will happen here. Handle success / error response accordingly.
       if (data) {
+        let latestTodoItem = null;
+        if (todoItems.length === 1) {
+          latestTodoItem = todoItems[0];
+        } else if (todoItems.length > 1) {
+          const todoItemsDescendingSortedById = todoItems.sort(
+            (a, b) => a.id - b.id
+          );
+          latestTodoItem = todoItemsDescendingSortedById[0];
+        }
+
+        const newTodoItem = data;
+        newTodoItem.id = latestTodoItem ? latestTodoItem.id + 1 : 0
+        // Add new Todo at the beginning of the array
+        const newTodoItems: ITaskForm[] = [newTodoItem, ...todoItems];
+
+        saveTodoItemsToLocalStorage("todo", newTodoItems);
+
         setFormStatus(formStatusProps.success);
         resetForm({});
       }
@@ -84,6 +106,7 @@ const TaskForm: React.FunctionComponent = () => {
     <div className={classes.root}>
       <Formik
         initialValues={{
+          id: 0,
           title: "",
           description: "",
           isCompleted: false,

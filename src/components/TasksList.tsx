@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   createButton: {
-    marginTop:25,
+    marginTop: 25,
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     border: 0,
     borderRadius: 3,
@@ -56,14 +56,14 @@ function generateList(todos: ITaskForm[]): JSX.Element[] {
     return (
       <ListItem>
         <ListItemIcon>
-          <Checkbox edge="start" checked={false} tabIndex={-1} disableRipple />
+          <Checkbox edge="start" checked={todo.isCompleted} tabIndex={-1} disableRipple />
         </ListItemIcon>
         <ListItemAvatar>
           <Avatar>
             <FolderIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Single-line item" secondary={"Secondary text"} />
+        <ListItemText primary={todo.title} secondary={todo.description} />
         <ListItemSecondaryAction>
           <IconButton edge="start" aria-label="edit">
             <EditIcon />
@@ -82,7 +82,7 @@ function generateList(todos: ITaskForm[]): JSX.Element[] {
 
 const TasksList = () => {
   const classes = useStyles();
-  const todoItems = getTodoItemsFromLocalStorage("todo") || [];
+  const todoItems:ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
 
   return (
     <div className={classes.root}>

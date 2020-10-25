@@ -20,5 +20,5 @@ export const getTodoItemsFromLocalStorage = (key: string) => {
   return todoItems;
 };
 
-export const saveTodoItemsToLocalStorage = (key: string, data: ITaskForm) =>
+export const saveTodoItemsToLocalStorage = (key: string, data: ITaskForm[]) =>
   localStorage.setItem(key, JSON.stringify(data));
