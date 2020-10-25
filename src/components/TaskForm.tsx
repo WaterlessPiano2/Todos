@@ -103,7 +103,7 @@ const TaskForm: React.FunctionComponent = () => {
           description: Yup.string()
             .defined()
             .min(2, "Too Short!")
-            .max(50, "Too Long!"),
+            .max(250, "Too Long!"),
           dueDate: Yup.date()
             .defined()
             .min(new Date(), "Due date can not be in the past"),
@@ -158,6 +158,7 @@ const TaskForm: React.FunctionComponent = () => {
                     label="Description"
                     value={values.description}
                     type="description"
+                    multiline
                     helperText={
                       errors.description && touched.description
                         ? errors.description
