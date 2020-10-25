@@ -82,13 +82,9 @@ const TasksList = () => {
     setTodoItems(newTodoItems);
   }
 
-  function deleteTasks(todo: ITaskForm) {
-    const newTodoItems = todoItems.map((t) => {
-      if (t.id === todo.id) {
-        t.isCompleted = !t.isCompleted;
-      }
-      return t;
-    });
+  function deleteTask(id: number) {
+    console.log(id);
+    const newTodoItems = todoItems.filter((t) => t.id !== id);
     saveTodoItemsToLocalStorage("todo", newTodoItems);
 
     setTodoItems(newTodoItems);
@@ -149,10 +145,14 @@ const TasksList = () => {
             <IconButton edge="start" aria-label="edit">
               <EditIcon />
             </IconButton>
-            <IconButton edge="start" aria-label="delete">
-              <SearchIcon />
-            </IconButton>
-            <IconButton edge="start" aria-label="search">
+              <IconButton edge="start" aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            <IconButton
+              edge="start"
+              aria-label="delete"
+              onClick={() => deleteTask(todo.id)}
+            >
               <DeleteIcon />
             </IconButton>
           </ListItemSecondaryAction>
