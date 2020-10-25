@@ -128,7 +128,27 @@ const TaskForm: React.FunctionComponent = () => {
     }
   };
 
-  const editATask = (data: ITaskForm, resetForm: Function) => {};
+  const editATask = (data: ITaskForm, resetForm: Function) => {
+    try {
+      if (data) {
+        const newTodoItems: ITaskForm[] = todoItems.map((t) => {
+          if (t.id === data.id) {
+            return data;
+          }
+          return t;
+        });
+
+        saveTodoItemsToLocalStorage("todo", newTodoItems);
+
+        setFormStatus(formStatusProps.success);
+        resetForm({});
+      }
+    } catch (error) {
+      setFormStatus(formStatusProps.error);
+    } finally {
+      setDisplayFormStatus(true);
+    }
+  };
 
   return (
     <div className={classes.root}>
