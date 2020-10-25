@@ -49,40 +49,70 @@ const useStyles = makeStyles((theme) => ({
     height: 48,
     padding: "0 30px",
   },
+  taskTitle: { fontSize: 30 },
+  taskDescription: {
+    maxWidth: "500px",
+  },
 }));
-
-function generateList(todos: ITaskForm[]): JSX.Element[] {
-  return todos.map((todo) => {
-    return (
-      <ListItem>
-        <ListItemIcon>
-          <Checkbox edge="start" checked={todo.isCompleted} tabIndex={-1} disableRipple />
-        </ListItemIcon>
-        <ListItemAvatar>
-          <Avatar>
-            <FolderIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary={todo.title} secondary={todo.description} />
-        <ListItemSecondaryAction>
-          <IconButton edge="start" aria-label="edit">
-            <EditIcon />
-          </IconButton>
-          <IconButton edge="start" aria-label="delete">
-            <SearchIcon />
-          </IconButton>
-          <IconButton edge="start" aria-label="search">
-            <DeleteIcon />
-          </IconButton>
-        </ListItemSecondaryAction>
-      </ListItem>
-    );
-  });
-}
 
 const TasksList = () => {
   const classes = useStyles();
-  const todoItems:ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
+  const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
+
+  function generateList(todos: ITaskForm[]): JSX.Element[] {
+    return todos.map((todo) => {
+      return (
+        <ListItem>
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              checked={todo.isCompleted}
+              tabIndex={-1}
+              disableRipple
+            />
+          </ListItemIcon>
+          <ListItemAvatar>
+            <Avatar>
+              <FolderIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <Grid container direction="column">
+            <Grid item lg={10} md={7} sm={6} xs={5}>
+              <Typography
+                className={classes.taskTitle}
+                variant="inherit"
+                display="block"
+                noWrap
+              >
+                {todo.title}
+              </Typography>
+            </Grid>
+            <Grid item lg={10} md={8} sm={7} xs={6}>
+              <Typography
+                className={classes.taskDescription}
+                variant="inherit"
+                display="block"
+                noWrap
+              >
+                {todo.description}
+              </Typography>
+            </Grid>
+          </Grid>
+          <ListItemSecondaryAction>
+            <IconButton edge="start" aria-label="edit">
+              <EditIcon />
+            </IconButton>
+            <IconButton edge="start" aria-label="delete">
+              <SearchIcon />
+            </IconButton>
+            <IconButton edge="start" aria-label="search">
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      );
+    });
+  }
 
   return (
     <div className={classes.root}>
