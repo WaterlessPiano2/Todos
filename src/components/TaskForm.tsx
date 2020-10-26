@@ -278,9 +278,14 @@ const TaskForm: React.FunctionComponent = () => {
                   xs={10}
                   className={classes.textField}
                 >
-                  <MyDropzone 
-                  // prop will come back with array of image strings
-                  //set image strings to the value of this input field
+                  <MyDropzone
+                    existingImages={[]}
+                    newImages={(i: string[]) => {
+                      values.images = i;
+                    }}
+
+                    // prop will come back with array of image strings
+                    //set image strings to the value of this input field
                   />
                 </Grid>
                 <Grid
