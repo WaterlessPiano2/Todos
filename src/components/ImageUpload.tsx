@@ -43,13 +43,14 @@ function Previews(props: any) {
     onDrop: (acceptedFiles: any) => {
       setFiles(
         acceptedFiles.map((file: any) => {
-          var encodedData = getBase64(file);
-          console.log(encodedData);
+          getBase64(file);
+          //push these to an array
           return Object.assign(file, {
             preview: URL.createObjectURL(file),
           });
         })
       );
+      ////send the array to the parent
     },
   });
 

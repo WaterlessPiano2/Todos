@@ -278,7 +278,10 @@ const TaskForm: React.FunctionComponent = () => {
                   xs={10}
                   className={classes.textField}
                 >
-                  <MyDropzone />
+                  <MyDropzone 
+                  // prop will come back with array of image strings
+                  //set image strings to the value of this input field
+                  />
                 </Grid>
                 <Grid
                   item
