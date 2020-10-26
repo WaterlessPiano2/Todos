@@ -38,19 +38,20 @@ const useStyles = makeStyles(() =>
 function Previews(props: any) {
   const classes = useStyles();
   const [files, setFiles] = useState([]);
+  const [parsedImages, setparsedImages] = useState([]);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles: any) => {
       setFiles(
         acceptedFiles.map((file: any) => {
           getBase64(file);
-          //push these to an array
           return Object.assign(file, {
             preview: URL.createObjectURL(file),
           });
         })
       );
-      ////send the array to the parent
+      console.log(parsedImages);
     },
   });
 
@@ -58,7 +59,13 @@ function Previews(props: any) {
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      console.log(reader.result);
+      const image = reader.result;
+      const newparsedImages: any = [image, ...parsedImages];
+      //console.log(newparsedImages);
+      if (parsedImages.length > 5) {
+        newparsedImages.pop();
+      }
+      setparsedImages(newparsedImages);
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
