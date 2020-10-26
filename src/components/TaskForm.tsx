@@ -14,6 +14,7 @@ import {
   getTodoItemsFromLocalStorage,
   saveTodoItemsToLocalStorage,
 } from "../helper";
+import MyDropzone from "./ImageUpload";
 import { useRouteMatch } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 
@@ -84,9 +85,9 @@ const TaskForm: React.FunctionComponent = () => {
     type: "",
   });
   const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
-    const { getRootProps, getInputProps } = useDropzone();
-    const { ref, ...rootProps } = getRootProps();
-console.log(ref)
+  const { getRootProps, getInputProps } = useDropzone();
+  const { ref, ...rootProps } = getRootProps();
+  console.log(ref);
   React.useEffect(() => {
     if (match !== null && match.params) {
       const params = match.params;
@@ -277,14 +278,7 @@ console.log(ref)
                   xs={10}
                   className={classes.textField}
                 >
-                  <RootRef rootRef={Yup.ref}>
-                    <Paper {...rootProps}>
-                      <input {...getInputProps()} />
-                      <p>
-                        Drag 'n' drop some files here, or click to select files
-                      </p>
-                    </Paper>
-                  </RootRef>
+                  <MyDropzone />
                 </Grid>
                 <Grid
                   item
