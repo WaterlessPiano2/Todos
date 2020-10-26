@@ -85,9 +85,7 @@ const TaskForm: React.FunctionComponent = () => {
     type: "",
   });
   const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
-  const { getRootProps, getInputProps } = useDropzone();
-  const { ref, ...rootProps } = getRootProps();
-  console.log(ref);
+
   React.useEffect(() => {
     if (match !== null && match.params) {
       const params = match.params;
@@ -100,6 +98,7 @@ const TaskForm: React.FunctionComponent = () => {
 
           const todos = todoItems.filter((t) => t.id === id);
           setDefaultInputs(todos[0]);
+          console.log(todos[0]);
         }
       }
     }

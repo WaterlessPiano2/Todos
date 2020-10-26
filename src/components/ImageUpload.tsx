@@ -39,7 +39,8 @@ function Previews(props: any) {
   const classes = useStyles();
   const [files, setFiles] = useState([]);
   const [parsedImages, setparsedImages] = useState([]);
-
+  console.log(props);
+  props.newImages(["a", "b", "c"]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles: any) => {
