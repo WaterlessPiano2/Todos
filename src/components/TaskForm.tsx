@@ -5,6 +5,8 @@ import {
   Button,
   makeStyles,
   createStyles,
+  Paper,
+  RootRef,
 } from "@material-ui/core";
 import { Formik, Form, FormikProps } from "formik";
 import * as Yup from "yup";
@@ -13,6 +15,7 @@ import {
   saveTodoItemsToLocalStorage,
 } from "../helper";
 import { useRouteMatch } from "react-router-dom";
+import { useDropzone } from "react-dropzone";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -81,7 +84,9 @@ const TaskForm: React.FunctionComponent = () => {
     type: "",
   });
   const todoItems: ITaskForm[] = getTodoItemsFromLocalStorage("todo") || [];
-
+    const { getRootProps, getInputProps } = useDropzone();
+    const { ref, ...rootProps } = getRootProps();
+console.log(ref)
   React.useEffect(() => {
     if (match !== null && match.params) {
       const params = match.params;
@@ -263,6 +268,23 @@ const TaskForm: React.FunctionComponent = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
+                </Grid>
+                <Grid
+                  item
+                  lg={10}
+                  md={10}
+                  sm={10}
+                  xs={10}
+                  className={classes.textField}
+                >
+                  <RootRef rootRef={Yup.ref}>
+                    <Paper {...rootProps}>
+                      <input {...getInputProps()} />
+                      <p>
+                        Drag 'n' drop some files here, or click to select files
+                      </p>
+                    </Paper>
+                  </RootRef>
                 </Grid>
                 <Grid
                   item
