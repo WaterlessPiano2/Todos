@@ -39,8 +39,7 @@ function Previews(props: any) {
   const classes = useStyles();
   const [files, setFiles] = useState([]);
   const [parsedImages, setparsedImages] = useState([]);
-  console.log(props);
-  props.newImages(["a", "b", "c"]);
+  //  console.log(props);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles: any) => {
@@ -52,7 +51,9 @@ function Previews(props: any) {
           });
         })
       );
+      console.log("parsedImages1");
       console.log(parsedImages);
+      props.newImages(parsedImages);
     },
   });
 
@@ -62,7 +63,6 @@ function Previews(props: any) {
     reader.onload = function () {
       const image = reader.result;
       const newparsedImages: any = [image, ...parsedImages];
-      //console.log(newparsedImages);
       if (parsedImages.length > 5) {
         newparsedImages.pop();
       }
@@ -72,6 +72,7 @@ function Previews(props: any) {
       console.log("Error: ", error);
     };
   }
+
   const thumbs = files.map((file: any) => (
     <div className={classes.thumb} key={file.name}>
       <div className={classes.thumbInner}>
@@ -84,6 +85,8 @@ function Previews(props: any) {
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
       files.forEach((file: any) => URL.revokeObjectURL(file.preview));
+      console.log("parsedImages2");
+      console.log(parsedImages);
     },
     [files]
   );
