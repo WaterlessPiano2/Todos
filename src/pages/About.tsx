@@ -36,7 +36,7 @@ const About = () => {
         most common quick starter template for react. Being commonly used I can
         find support and plugins easier, compared to something not as popular. I
         have experince using it long time ago. It comes with TypeScript support
-        and built in jest framework, so this saved me time at the start.
+        and built in test framework, so this saved me time at the start.
       </Typography>
       <Typography className={classes.title} variant="h4" gutterBottom>
         Reusable Components

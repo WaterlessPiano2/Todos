@@ -56,3 +56,4 @@ These are about how the form for tasks.
 
 - [ ] Additionally, one or more **images can be added** to the task
 - [ ] **If present a thumbnail** of the first task image will be **displayed**
+- [ ] Automated testing

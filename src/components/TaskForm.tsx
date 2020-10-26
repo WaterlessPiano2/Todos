@@ -137,7 +137,6 @@ const TaskForm: React.FunctionComponent = () => {
           }
           return t;
         });
-
         saveTodoItemsToLocalStorage("todo", newTodoItems);
 
         setFormStatus(formStatusProps.success);
