@@ -42,15 +42,27 @@ function Previews(props: any) {
     accept: "image/*",
     onDrop: (acceptedFiles: any) => {
       setFiles(
-        acceptedFiles.map((file: any) =>
-          Object.assign(file, {
+        acceptedFiles.map((file: any) => {
+          var encodedData = getBase64(file);
+          console.log(encodedData);
+          return Object.assign(file, {
             preview: URL.createObjectURL(file),
-          })
-        )
+          });
+        })
       );
     },
   });
 
+  function getBase64(file: any) {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  }
   const thumbs = files.map((file: any) => (
     <div className={classes.thumb} key={file.name}>
       <div className={classes.thumbInner}>
